@@ -73,40 +73,40 @@ INSERT INTO vocabulary (word, meaning, phonetic, topic_id) VALUES
 
 -- Insert sample tests for Basic Greetings
 INSERT INTO test (question, correct_answer, option1, option2, option3, topic_id) VALUES
-('What is the meaning of "Hello"?', 'Xin chào', 'Tạm biệt', 'Cảm ơn', 'Xin lỗi', 1),
-('What is the meaning of "Good morning"?', 'Chào buổi sáng', 'Chào buổi chiều', 'Chào buổi tối', 'Tạm biệt', 1),
-('What is the meaning of "Thank you"?', 'Cảm ơn bạn', 'Xin lỗi', 'Tạm biệt', 'Hẹn gặp lại', 1),
-('What is the meaning of "How are you?"?', 'Bạn khỏe không?', 'Tôi khỏe', 'Cảm ơn', 'Tạm biệt', 1),
-('What is the meaning of "Goodbye"?', 'Tạm biệt', 'Xin chào', 'Cảm ơn', 'Hẹn gặp lại', 1);
+('What is the meaning of "Hello"?', 'Xin chào', 'Xin chào', 'Tạm biệt', 'Cảm ơn', 1),
+('What is the meaning of "Good morning"?', 'Chào buổi sáng', 'Chào buổi sáng', 'Chào buổi chiều', 'Chào buổi tối', 1),
+('What is the meaning of "Thank you"?', 'Cảm ơn bạn', 'Xin lỗi', 'Cảm ơn bạn', 'Tạm biệt', 1),
+('What is the meaning of "How are you?"?', 'Bạn khỏe không?', 'Bạn khỏe không?', 'Tôi khỏe', 'Cảm ơn', 1),
+('What is the meaning of "Goodbye"?', 'Tạm biệt', 'Xin chào', 'Tạm biệt', 'Cảm ơn', 1);
 
 -- Insert sample tests for Numbers and Time
 INSERT INTO test (question, correct_answer, option1, option2, option3, topic_id) VALUES
-('What is the meaning of "One"?', 'Số một', 'Số hai', 'Số ba', 'Số bốn', 2),
-('What is the meaning of "Morning"?', 'Buổi sáng', 'Buổi chiều', 'Buổi tối', 'Ban đêm', 2),
-('What is the meaning of "Today"?', 'Hôm nay', 'Hôm qua', 'Ngày mai', 'Tuần sau', 2),
-('What is the meaning of "Five"?', 'Số năm', 'Số bốn', 'Số sáu', 'Số bảy', 2),
-('What is the meaning of "Evening"?', 'Buổi tối', 'Buổi sáng', 'Buổi chiều', 'Ban đêm', 2);
+('What is the meaning of "One"?', 'Số một', 'Số một', 'Số hai', 'Số ba', 2),
+('What is the meaning of "Morning"?', 'Buổi sáng', 'Buổi sáng', 'Buổi chiều', 'Buổi tối', 2),
+('What is the meaning of "Today"?', 'Hôm nay', 'Hôm nay', 'Hôm qua', 'Ngày mai', 2),
+('What is the meaning of "Five"?', 'Số năm', 'Số bốn', 'Số năm', 'Số sáu', 2),
+('What is the meaning of "Evening"?', 'Buổi tối', 'Buổi sáng', 'Buổi tối', 'Buổi chiều', 2);
 
 -- Insert sample tests for Family Members
 INSERT INTO test (question, correct_answer, option1, option2, option3, topic_id) VALUES
-('What is the meaning of "Father"?', 'Bố', 'Mẹ', 'Anh trai', 'Em gái', 3),
-('What is the meaning of "Mother"?', 'Mẹ', 'Bố', 'Chị gái', 'Em trai', 3),
-('What is the meaning of "Brother"?', 'Anh/em trai', 'Chị/em gái', 'Bố', 'Mẹ', 3),
-('What is the meaning of "Grandfather"?', 'Ông', 'Bà', 'Bố', 'Mẹ', 3),
-('What is the meaning of "Cousin"?', 'Anh/chị/em họ', 'Chú/bác', 'Cô/dì', 'Cháu', 3);
+('What is the meaning of "Father"?', 'Bố', 'Bố', 'Mẹ', 'Anh trai', 3),
+('What is the meaning of "Mother"?', 'Mẹ', 'Mẹ', 'Bố', 'Chị gái', 3),
+('What is the meaning of "Brother"?', 'Anh/em trai', 'Chị/em gái', 'Anh/em trai', 'Bố', 3),
+('What is the meaning of "Grandfather"?', 'Ông', 'Ông', 'Bà', 'Bố', 3),
+('What is the meaning of "Cousin"?', 'Anh/chị/em họ', 'Anh/chị/em họ', 'Chú/bác', 'Cô/dì', 3);
 
 -- Insert sample tests for Food and Drinks
 INSERT INTO test (question, correct_answer, option1, option2, option3, topic_id) VALUES
-('What is the meaning of "Rice"?', 'Cơm', 'Mì', 'Bánh mì', 'Nước', 4),
-('What is the meaning of "Coffee"?', 'Cà phê', 'Trà', 'Sữa', 'Nước', 4),
-('What is the meaning of "Bread"?', 'Bánh mì', 'Cơm', 'Mì', 'Nước', 4),
-('What is the meaning of "Fruit"?', 'Trái cây', 'Rau củ', 'Thịt', 'Cá', 4),
-('What is the meaning of "Vegetables"?', 'Rau củ', 'Trái cây', 'Thịt', 'Cá', 4);
+('What is the meaning of "Rice"?', 'Cơm', 'Cơm', 'Mì', 'Bánh mì', 4),
+('What is the meaning of "Coffee"?', 'Cà phê', 'Cà phê', 'Trà', 'Sữa', 4),
+('What is the meaning of "Bread"?', 'Bánh mì', 'Bánh mì', 'Cơm', 'Mì', 4),
+('What is the meaning of "Fruit"?', 'Trái cây', 'Trái cây', 'Rau củ', 'Thịt', 4),
+('What is the meaning of "Vegetables"?', 'Rau củ', 'Rau củ', 'Trái cây', 'Thịt', 4);
 
 -- Insert sample tests for Daily Activities
 INSERT INTO test (question, correct_answer, option1, option2, option3, topic_id) VALUES
-('What is the meaning of "Wake up"?', 'Thức dậy', 'Đi ngủ', 'Ăn sáng', 'Đi làm', 5),
-('What is the meaning of "Brush teeth"?', 'Đánh răng', 'Tắm', 'Ăn sáng', 'Đi làm', 5),
-('What is the meaning of "Take a shower"?', 'Tắm', 'Đánh răng', 'Ăn sáng', 'Đi làm', 5),
-('What is the meaning of "Have breakfast"?', 'Ăn sáng', 'Ăn trưa', 'Ăn tối', 'Đi ngủ', 5),
-('What is the meaning of "Go to bed"?', 'Đi ngủ', 'Thức dậy', 'Ăn sáng', 'Đi làm', 5); 
+('What is the meaning of "Wake up"?', 'Thức dậy', 'Thức dậy', 'Đi ngủ', 'Ăn sáng', 5),
+('What is the meaning of "Brush teeth"?', 'Đánh răng', 'Tắm', 'Đánh răng', 'Ăn sáng', 5),
+('What is the meaning of "Take a shower"?', 'Tắm', 'Đánh răng', 'Tắm', 'Ăn sáng', 5),
+('What is the meaning of "Have breakfast"?', 'Ăn sáng', 'Ăn trưa', 'Ăn sáng', 'Ăn tối', 5),
+('What is the meaning of "Go to bed"?', 'Đi ngủ', 'Thức dậy', 'Đi ngủ', 'Ăn sáng', 5); 
