@@ -3,7 +3,7 @@ from dataclasses import dataclass
 @dataclass
 class TestResultInput:
     user_id: int
-    test_id: int
+    topic_id: int
     score: float
 
 @dataclass

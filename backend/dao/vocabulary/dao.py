@@ -19,4 +19,5 @@ class VocabularyDAO(VocabularyDAOInterface):
             
             return [Vocabulary.from_dict(vocab_data) for vocab_data in vocabularies_data]
         finally:
-            cursor.close() 
+            cursor.close()
+            conn.close() 

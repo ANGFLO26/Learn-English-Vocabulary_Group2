@@ -55,17 +55,17 @@ class DAOManager:
         return self.test_dao.get_test_by_topic_id(topic_id)
 
     # Test result operations
-    def save_test_result(self, user_id: int, test_id: int, score: float):
+    def save_test_result(self, user_id: int, topic_id: int, score: float):
         """Save test result and determine if passed"""
-        return self.test_result_dao.save_result(user_id, test_id, score)
+        return self.test_result_dao.save_result(user_id, topic_id, score)
 
     def check_user_passed_topic(self, user_id: int, topic_id: int):
         """Check if user has passed a topic"""
         return self.test_result_dao.check_user_passed_topic(user_id, topic_id)
 
-    def get_user_test_result(self, user_id: int, test_id: int):
-        """Get test result for a specific user and test"""
-        return self.test_result_dao.get_result_by_user_and_test(user_id, test_id)
+    def get_user_test_result(self, user_id: int, topic_id: int):
+        """Get test result for a specific user and topic"""
+        return self.test_result_dao.get_result_by_user_and_topic(user_id, topic_id)
 
     def __del__(self):
         """Cleanup connections when DAO Manager is destroyed"""

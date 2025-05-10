@@ -56,6 +56,7 @@ class UserDAO(UserDAOInterface):
             raise
         finally:
             cursor.close()
+            conn.close()
 
     def get_user_by_username(self, username: str) -> Optional[User]:
         """Get user by username"""
@@ -76,6 +77,7 @@ class UserDAO(UserDAOInterface):
             raise
         finally:
             cursor.close()
+            conn.close()
 
     def get_user_by_id(self, user_id: int) -> Optional[User]:
         """Get user by ID"""
@@ -96,6 +98,7 @@ class UserDAO(UserDAOInterface):
             raise
         finally:
             cursor.close()
+            conn.close()
 
     def verify_user_credentials(self, username: str, password: str) -> Optional[User]:
         """Verify user credentials and generate JWT token"""
@@ -143,6 +146,7 @@ class UserDAO(UserDAOInterface):
             raise
         finally:
             cursor.close()
+            conn.close()
 
     def clear_token(self, user_id: int) -> bool:
         """Clear JWT token for user"""
@@ -162,4 +166,5 @@ class UserDAO(UserDAOInterface):
             conn.rollback()
             raise
         finally:
-            cursor.close() 
+            cursor.close()
+            conn.close() 

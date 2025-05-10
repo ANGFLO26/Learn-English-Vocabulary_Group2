@@ -16,7 +16,6 @@ class DatabaseConnection:
     def __new__(cls):
         if cls._instance is None:
             cls._instance = super(DatabaseConnection, cls).__new__(cls)
-            cls._instance.connection = None
             cls._instance.initialize_pool()
         return cls._instance
 
@@ -34,41 +33,20 @@ class DatabaseConnection:
                 "connect_timeout": int(os.getenv('DB_CONNECT_TIMEOUT', '10')),
                 "use_pure": True
             }
-            
             logger.info("Initializing database connection pool...")
             self._pool = mysql.connector.pooling.MySQLConnectionPool(**dbconfig)
             logger.info("Database connection pool initialized successfully")
-            
         except Error as e:
             logger.error(f"Error creating connection pool: {e}")
             raise
 
-    def connect(self) -> Optional[mysql.connector.MySQLConnection]:
-        """Get a connection from the pool"""
-        try:
-            if self.connection is None or not self.connection.is_connected():
-                self.connection = self._pool.get_connection()
-                logger.debug("New database connection established")
-            return self.connection
-        except Error as e:
-            logger.error(f"Error connecting to MySQL: {e}")
-            raise
-
-    def disconnect(self):
-        """Close the current connection"""
-        try:
-            if self.connection and self.connection.is_connected():
-                self.connection.close()
-                self.connection = None
-                logger.debug("Database connection closed")
-        except Error as e:
-            logger.error(f"Error closing database connection: {e}")
-            raise
-
     def get_connection(self) -> Optional[mysql.connector.MySQLConnection]:
-        """Get a database connection"""
-        return self.connect()
+        """Always get a new connection from the pool"""
+        try:
+            return self._pool.get_connection()
+        except Error as e:
+            logger.error(f"Error getting connection from pool: {e}")
+            raise
 
     def __del__(self):
-        """Cleanup when the object is destroyed"""
-        self.disconnect() 
+        pass 

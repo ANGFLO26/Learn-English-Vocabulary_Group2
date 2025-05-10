@@ -158,46 +158,25 @@ def get_tests(current_user, topic_id):
 @app.route('/test_result', methods=['POST'])
 @token_required
 def submit_test_result(current_user):
-    """Submit one or multiple test results"""
+    """Submit test result for a topic (one row per user-topic)"""
     data = request.get_json()
-    results = []
-    # Nếu là list (nhiều bài test)
-    if isinstance(data, list):
-        for item in data:
-            is_valid, message = validate_required_fields(item, ['test_id', 'score'])
-            if not is_valid:
-                return jsonify({'message': message}), 400
-            result_input = TestResultInput(
-                user_id=current_user.id,
-                test_id=item['test_id'],
-                score=item['score']
-            )
-            result = dao_manager.save_test_result(
-                result_input.user_id,
-                result_input.test_id,
-                result_input.score
-            )
-            results.append(TestResultOutput.from_test_result(result).__dict__)
-        return jsonify({'results': results})
-    # Nếu là object (1 bài test)
-    else:
-        is_valid, message = validate_required_fields(data, ['test_id', 'score'])
-        if not is_valid:
-            return jsonify({'message': message}), 400
-        try:
-            result_input = TestResultInput(
-                user_id=current_user.id,
-                test_id=data['test_id'],
-                score=data['score']
-            )
-            result = dao_manager.save_test_result(
-                result_input.user_id,
-                result_input.test_id,
-                result_input.score
-            )
-            return jsonify(TestResultOutput.from_test_result(result).__dict__)
-        except Exception as e:
-            return jsonify({'message': str(e)}), 400
+    is_valid, message = validate_required_fields(data, ['topic_id', 'score'])
+    if not is_valid:
+        return jsonify({'message': message}), 400
+    try:
+        result_input = TestResultInput(
+            user_id=current_user.id,
+            topic_id=data['topic_id'],
+            score=data['score']
+        )
+        result = dao_manager.save_test_result(
+            result_input.user_id,
+            result_input.topic_id,
+            result_input.score
+        )
+        return jsonify(TestResultOutput.from_test_result(result).__dict__)
+    except Exception as e:
+        return jsonify({'message': str(e)}), 400
 
 @app.route('/check_pass/<int:topic_id>', methods=['GET'])
 @token_required
@@ -208,6 +187,28 @@ def check_pass(current_user, topic_id):
         return jsonify({'is_passed': is_passed})
     except Exception as e:
         return jsonify({'message': str(e)}), 400
+
+@app.route('/topic/<int:topic_id>', methods=['GET'])
+@token_required
+def get_topic(current_user, topic_id):
+    """Get a specific topic by ID"""
+    try:
+        topic = dao_manager.get_topic_by_id(topic_id)
+        if not topic:
+            return jsonify({'message': 'Topic not found'}), 404
+        return jsonify({'topic': TopicOutput.from_topic(topic).__dict__})
+    except Exception as e:
+        return jsonify({'message': str(e)}), 400
+
+@app.route('/check_pass_multi', methods=['GET'])
+@token_required
+def check_pass_multi(current_user):
+    topic_ids = request.args.get('topic_ids', '')
+    topic_id_list = [int(tid) for tid in topic_ids.split(',') if tid.isdigit()]
+    results = {}
+    for tid in topic_id_list:
+        results[str(tid)] = dao_manager.check_user_passed_topic(current_user.id, tid)
+    return jsonify({'results': results})
 
 if __name__ == '__main__':
     app.run(debug=True) 

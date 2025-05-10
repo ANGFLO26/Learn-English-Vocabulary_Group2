@@ -17,6 +17,7 @@ class TopicDAO(TopicDAOInterface):
             return [Topic.from_dict(topic_data) for topic_data in topics_data]
         finally:
             cursor.close()
+            conn.close()
 
     def get_topic_by_id(self, topic_id: int) -> Topic:
         conn = self.connection.get_connection()
@@ -28,4 +29,5 @@ class TopicDAO(TopicDAOInterface):
             
             return Topic.from_dict(topic_data) if topic_data else None
         finally:
-            cursor.close() 
+            cursor.close()
+            conn.close() 

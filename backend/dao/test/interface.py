@@ -3,6 +3,7 @@ from typing import List
 
 @dataclass
 class TestQuestionOutput:
+    id: int
     question: str
     option1: str
     option2: str
@@ -12,6 +13,7 @@ class TestQuestionOutput:
     @classmethod
     def from_test_question(cls, test_question):
         return cls(
+            id=test_question.id,
             question=test_question.question,
             option1=test_question.option1,
             option2=test_question.option2,

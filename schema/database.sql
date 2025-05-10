@@ -40,11 +40,11 @@ CREATE TABLE test (
 CREATE TABLE test_result (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
-    test_id INT NOT NULL,
+    topic_id INT NOT NULL,
     score FLOAT NOT NULL,
     is_passed BOOLEAN NOT NULL,
     submitted_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE KEY unique_user_test (user_id, test_id),
+    UNIQUE KEY unique_user_topic (user_id, topic_id),
     FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
-    FOREIGN KEY (test_id) REFERENCES test(id) ON DELETE CASCADE
+    FOREIGN KEY (topic_id) REFERENCES topic(id) ON DELETE CASCADE
 );

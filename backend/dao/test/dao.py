@@ -19,4 +19,5 @@ class TestDAO(TestDAOInterface):
             
             return [TestQuestion.from_dict(question_data) for question_data in test_questions_data]
         finally:
-            cursor.close() 
+            cursor.close()
+            conn.close() 
