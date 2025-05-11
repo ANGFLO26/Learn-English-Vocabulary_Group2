@@ -6,11 +6,9 @@
 
 ## Thành viên nhóm
 
-- Thành viên 1 (MSSV)
-- Thành viên 2 (MSSV)
-- Thành viên 3 (MSSV)
-- Thành viên 4 (MSSV)
-- Thành viên 5 (MSSV)
+- Phan Minh Thuy (2202079)
+- Phan Văn Tài (2202081)
+- Hà Minh Chiến (2202095)
 
 ## Mô tả dự án
 
