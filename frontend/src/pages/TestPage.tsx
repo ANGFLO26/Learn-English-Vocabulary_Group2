@@ -26,7 +26,7 @@ const TestPage = () => {
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   // Fetch topic data with caching
-  const { data: topic, isLoading: topicLoading } = useQuery({
+  const { data: topic, isLoading: topicLoading, isError: topicError, error: topicErrorObj } = useQuery({
     queryKey: ["topic", topicId],
     queryFn: () => getTopic(topicId || ""),
     enabled: !!topicId,
@@ -37,7 +37,9 @@ const TestPage = () => {
   // Fetch quiz questions with caching
   const { 
     data: questions,
-    isLoading: questionsLoading 
+    isLoading: questionsLoading,
+    isError: questionsError,
+    error: questionsErrorObj
   } = useQuery({
     queryKey: ["quiz", topicId],
     queryFn: () => getTopicQuizQuestions(topicId || ""),
@@ -47,6 +49,8 @@ const TestPage = () => {
   });
 
   const isLoading = topicLoading || questionsLoading;
+  const isError = topicError || questionsError;
+  const errorMsg = topicErrorObj?.message || questionsErrorObj?.message;
   const totalQuestions = questions?.length || 0;
   const progress = (answeredQuestions.length / totalQuestions) * 100;
   const hasNextQuestion = currentQuestionIndex < totalQuestions - 1;
@@ -149,7 +153,7 @@ const TestPage = () => {
     <div className="page-transition">
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="icon" asChild>
+          <Button variant="outline" size="icon" asChild disabled={isLoading || isSubmitting}>
             <Link to="/topics">
               <ChevronLeft className="h-4 w-4" />
             </Link>
@@ -168,6 +172,12 @@ const TestPage = () => {
           </div>
         )}
       </div>
+
+      {isError && (
+        <div className="text-red-500 text-center mb-4">
+          Đã có lỗi xảy ra khi tải dữ liệu: {errorMsg || "Vui lòng thử lại sau."}
+        </div>
+      )}
 
       {!testCompleted ? (
         <>
@@ -191,6 +201,7 @@ const TestPage = () => {
                 <QuizQuestion
                   question={questions[currentQuestionIndex]}
                   onAnswer={handleAnswer}
+                  disabled={isSubmitting}
                 />
               )}
             </>

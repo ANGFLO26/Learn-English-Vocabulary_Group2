@@ -29,7 +29,7 @@ export const getTopic = async (topicId: string): Promise<Topic | null> => {
     return response.data.topic || null;
   } catch (error) {
     console.error(`Error fetching topic with ID ${topicId}:`, error);
-    return null;
+    throw error;
   }
 };
 
@@ -40,7 +40,7 @@ export const getTopics = async (): Promise<Topic[]> => {
     return response.data.topics || [];
   } catch (error) {
     console.error('Error fetching topics:', error);
-    return [];
+    throw error;
   }
 };
 
@@ -52,7 +52,7 @@ export const getTopicVocabulary = async (topicId: string): Promise<VocabularyWor
     return response.data.vocabularies || [];
   } catch (error) {
     console.error(`Error fetching vocabulary for topic ${topicId}:`, error);
-    return [];
+    throw error;
   }
 };
 
@@ -64,7 +64,7 @@ export const getTopicQuizQuestions = async (topicId: string): Promise<QuizQuesti
     return response.data.questions || [];
   } catch (error) {
     console.error(`Error fetching quiz questions for topic ${topicId}:`, error);
-    return [];
+    throw error;
   }
 };
 
@@ -86,7 +86,7 @@ export const checkTopicPassed = async (topicId: string): Promise<boolean> => {
     return response.data.is_passed || false;
   } catch (error) {
     console.error(`Error checking if topic ${topicId} is passed:`, error);
-    return false;
+    throw error;
   }
 };
 
@@ -97,6 +97,6 @@ export const checkMultiTopicPassed = async (topicIds: string[]): Promise<Record<
     return response.data.results || {};
   } catch (error) {
     console.error('Error checking multi topic passed:', error);
-    return {};
+    throw error;
   }
 };

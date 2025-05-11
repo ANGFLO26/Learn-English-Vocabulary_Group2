@@ -15,9 +15,10 @@ interface QuizQuestionType {
 interface QuizQuestionProps {
   question: QuizQuestionType;
   onAnswer: (isCorrect: boolean) => void;
+  disabled?: boolean;
 }
 
-const QuizQuestion = ({ question, onAnswer }: QuizQuestionProps) => {
+const QuizQuestion = ({ question, onAnswer, disabled }: QuizQuestionProps) => {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
@@ -33,7 +34,7 @@ const QuizQuestion = ({ question, onAnswer }: QuizQuestionProps) => {
   const isCorrect = selectedAnswer === question.correct_answer;
 
   const handleSubmit = () => {
-    if (!selectedAnswer || hasSubmitted) return;
+    if (!selectedAnswer || hasSubmitted || disabled) return;
     setHasSubmitted(true);
     onAnswer(isCorrect);
   };
@@ -55,7 +56,7 @@ const QuizQuestion = ({ question, onAnswer }: QuizQuestionProps) => {
         value={selectedAnswer || ""}
         onValueChange={!hasSubmitted ? setSelectedAnswer : undefined}
         className="space-y-3"
-        disabled={hasSubmitted}
+        disabled={hasSubmitted || disabled}
       >
         {options.map((option, index) => (
           <div
@@ -76,7 +77,7 @@ const QuizQuestion = ({ question, onAnswer }: QuizQuestionProps) => {
         <Button
           className="w-full mt-4"
           onClick={handleSubmit}
-          disabled={!selectedAnswer}
+          disabled={!selectedAnswer || disabled}
         >
           Kiểm tra
         </Button>

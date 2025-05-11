@@ -6,17 +6,17 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useProgress } from "../context/ProgressContext";
 
 const TopicsPage = () => {
-  const { data: topics, isLoading, error } = useQuery({
+  const { data: topics, isLoading, error, isError } = useQuery({
     queryKey: ["topics"],
     queryFn: getTopics,
   });
   const { fetchMultiTopicProgress } = useProgress();
 
   useEffect(() => {
-    if (error) {
+    if (isError) {
       console.error("Error fetching topics:", error);
     }
-  }, [error]);
+  }, [isError, error]);
 
   useEffect(() => {
     if (topics && topics.length > 0) {
@@ -42,9 +42,9 @@ const TopicsPage = () => {
             </div>
           ))}
         </div>
-      ) : error ? (
+      ) : isError ? (
         <div className="text-center p-8">
-          <p className="text-red-500">Có lỗi xảy ra khi tải chủ đề. Vui lòng thử lại sau.</p>
+          <p className="text-red-500">Có lỗi xảy ra khi tải chủ đề: {error?.message || "Vui lòng thử lại sau."}</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
