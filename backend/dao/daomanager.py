@@ -65,9 +65,4 @@ class DAOManager:
 
     def get_user_test_result(self, user_id: int, topic_id: int):
         """Get test result for a specific user and topic"""
-        return self.test_result_dao.get_result_by_user_and_topic(user_id, topic_id)
-
-    def __del__(self):
-        """Cleanup connections when DAO Manager is destroyed"""
-        if hasattr(self, 'connection'):
-            self.connection.disconnect() 
+        return self.test_result_dao.get_result_by_user_and_topic(user_id, topic_id) 
