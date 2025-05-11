@@ -25,7 +25,7 @@ class DatabaseConnection:
             dbconfig = {
                 "host": os.getenv('DB_HOST', 'localhost'),
                 "user": os.getenv('DB_USER', 'root'),
-                "password": os.getenv('DB_PASSWORD', 'NewPassword123!'),
+                "password": os.getenv('DB_PASSWORD', '12345678'),
                 "port": int(os.getenv('DB_PORT', '3306')),
                 "database": os.getenv('DB_NAME', 'english_learning_app'),
                 "pool_name": "mypool",

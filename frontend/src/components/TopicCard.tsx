@@ -11,10 +11,22 @@ interface TopicCardProps {
 const TopicCard = ({ topic }: TopicCardProps) => {
   const { isTopicCompleted } = useProgress();
   const completed = isTopicCompleted(topic.id);
+  
+  // Tạo đường dẫn ảnh dựa trên ID của topic
+  const imagePath = `/imagetopics/${topic.id}.jpg`;
 
   return (
     <div className="card-glass rounded-xl overflow-hidden flex flex-col">
       <div className="aspect-video relative overflow-hidden bg-gray-200">
+        <img 
+          src={imagePath} 
+          alt={topic.name_topic} 
+          className="object-cover w-full h-full"
+          onError={(e) => {
+            // Xử lý khi ảnh không tải được
+            e.currentTarget.src = '/imagetopics/1.jpg'; // Ảnh mặc định 
+          }}
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end">
           <div className="text-white p-4">
             <h3 className="text-lg font-semibold">{topic.name_topic}</h3>

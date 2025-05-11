@@ -38,6 +38,7 @@ type RegisterFormValues = z.infer<typeof registerSchema>;
 
 const AuthPage = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [tabValue, setTabValue] = useState("login");
   const { login, register } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -97,7 +98,7 @@ const AuthPage = () => {
           title: "Đăng ký thành công",
           description: "Tài khoản của bạn đã được tạo! Vui lòng đăng nhập để tiếp tục.",
         });
-        navigate("/login");
+        setTabValue("login");
       } else {
         toast({
           title: "Đăng ký thất bại",
@@ -126,7 +127,7 @@ const AuthPage = () => {
         </div>
 
         <Card className="glass">
-          <Tabs defaultValue="login" className="w-full">
+          <Tabs value={tabValue} onValueChange={setTabValue} className="w-full">
             <TabsList className="grid w-full grid-cols-2 mb-4">
               <TabsTrigger value="login">Đăng nhập</TabsTrigger>
               <TabsTrigger value="register">Đăng ký</TabsTrigger>
