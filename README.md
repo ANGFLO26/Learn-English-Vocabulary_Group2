@@ -181,3 +181,76 @@ Nếu bạn muốn đóng góp vào dự án, hãy làm theo các bước sau:
 ## Giấy phép
 
 Dự án này được cấp phép theo giấy phép MIT - xem file LICENSE để biết thêm chi tiết.
+
+## Chạy Test
+
+### Cài đặt dependencies cho test
+```bash
+pip install pytest
+```
+
+### Chạy test
+```bash
+# Chạy tất cả test cases
+pytest backend/test.py -v
+
+# Chạy test case cụ thể
+pytest backend/test.py::test_full_api_flow -v
+```
+
+### Các test cases chính
+
+1. **Authentication Tests**
+   - `test_full_api_flow`: Kiểm tra toàn bộ luồng hoạt động
+   - `test_register_missing_fields`: Kiểm tra đăng ký thiếu thông tin
+   - `test_login_wrong_password`: Kiểm tra đăng nhập sai mật khẩu
+   - `test_register_invalid_email`: Kiểm tra email không hợp lệ
+   - `test_register_existing_username`: Kiểm tra username trùng
+   - `test_login_nonexistent_username`: Kiểm tra username không tồn tại
+   - `test_logout_invalid_token`: Kiểm tra token không hợp lệ
+   - `test_protected_route_no_token`: Kiểm tra route được bảo vệ
+
+2. **Topic & Vocabulary Tests**
+   - `test_get_nonexistent_topic`: Kiểm tra topic không tồn tại
+   - `test_get_topics_invalid_token`: Kiểm tra token không hợp lệ
+   - `test_get_vocabulary_nonexistent_topic`: Kiểm tra vocabulary của topic không tồn tại
+   - `test_get_vocabulary_invalid_token`: Kiểm tra token không hợp lệ
+
+3. **Test Result Tests**
+   - `test_submit_test_result_invalid_score`: Kiểm tra điểm không hợp lệ
+   - `test_submit_test_result_nonexistent_topic`: Kiểm tra topic không tồn tại
+   - `test_submit_test_result_boundary_scores`: Kiểm tra điểm biên
+   - `test_submit_test_result_missing_fields`: Kiểm tra thiếu thông tin
+
+4. **Check Pass Tests**
+   - `test_check_pass_nonexistent_topic`: Kiểm tra topic không tồn tại
+   - `test_check_pass_multi_invalid_topic_ids`: Kiểm tra topic_ids không hợp lệ
+
+5. **Password Validation Tests**
+   - `test_register_special_characters`: Kiểm tra ký tự đặc biệt
+   - `test_register_password_too_short`: Kiểm tra mật khẩu quá ngắn
+   - `test_register_password_too_long`: Kiểm tra mật khẩu quá dài
+
+### Lưu ý khi chạy test
+- Đảm bảo đã cài đặt đầy đủ dependencies
+- Database phải được cấu hình đúng
+- Các biến môi trường cần thiết phải được set
+- Test cases được thiết kế để chạy độc lập
+- Mỗi test case sẽ tự cleanup dữ liệu test
+
+### Troubleshooting
+1. Nếu gặp lỗi "ModuleNotFoundError":
+   ```bash
+   # Thêm thư mục gốc vào PYTHONPATH
+   export PYTHONPATH=$PYTHONPATH:$(pwd)
+   ```
+
+2. Nếu gặp lỗi kết nối database:
+   - Kiểm tra file cấu hình database
+   - Đảm bảo database server đang chạy
+   - Kiểm tra quyền truy cập database
+
+3. Nếu test case bị fail:
+   - Kiểm tra log để xem chi tiết lỗi
+   - Đảm bảo database có dữ liệu test cần thiết
+   - Kiểm tra các biến môi trường
